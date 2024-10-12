@@ -29,7 +29,7 @@ function App() {
 
   return (
     <>
-      <img src={`/public/${count}.jpeg`} alt="Logo" />
+      <img src={`/Civitas-SCI-tg-app/docs/${count}.jpeg`} alt="Logo" />
       <div className="check-items">
         {checkItems.map((item, id) => {
           return (

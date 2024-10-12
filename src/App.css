@@ -1,7 +1,6 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  text-align: center;
 }
 
 .logo {
@@ -44,15 +43,17 @@
 }
 
 img {
-  width: 90%;
+  width: 100%;
 }
 .check-items {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .check-item {
- margin-right: 20px;
+ margin: 10px;
+ width: 150px;
 }
 .check-item.selected {
   outline: auto;
