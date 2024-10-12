@@ -2,7 +2,7 @@ import { useState } from 'react';
 import HelpIcon from './icons/HelpIcon';
 import './App.css';
 
-import WebApp from '@twa-dev/sdk';
+// import WebApp from '@twa-dev/sdk';
 
 const CHECK_ITEMS = [
   {title: 'Galaxies', selected: false},
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <>
-      <img src={`./src/assets/${count}.jpeg`} alt="Logo" />
+      <img src={`/public/${count}.jpeg`} alt="Logo" />
       <div className="check-items">
         {checkItems.map((item, id) => {
           return (
