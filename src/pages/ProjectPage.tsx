@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import HelpIcon from './icons/HelpIcon';
-import './App.css';
+import { useState } from "react"
 
-// import WebApp from '@twa-dev/sdk';
+import HelpIcon from '../icons/HelpIcon';
+import './project-page.css';
 
 const CHECK_ITEMS = [
   {title: 'Galaxies', selected: false},
@@ -11,7 +10,7 @@ const CHECK_ITEMS = [
   {title: 'Just stars', selected: false}
 ];
 
-function App() {
+export const ProjectPage = () => {
   const [checkItems, setCheckItems] = useState(CHECK_ITEMS);
   const [count, setCount] = useState(1);
 
@@ -30,10 +29,12 @@ function App() {
   return (
     <>
       <img src={`./docs/${count}.jpeg`} alt="Logo" />
+
       <div className="check-items">
         {checkItems.map((item, id) => {
           return (
             <button
+              key={id}
               className={`check-item ${item.selected && 'selected'}`}
               onClick={() => {
                 const items = checkItems.map((i) => ({...i}));
@@ -44,16 +45,16 @@ function App() {
             </button>
         )})}
       </div>
+
       <div className="card">
         <button
          onClick={submitLabels}
          disabled={checkItems.every(i => !i.selected)}>
           Submit
         </button>
+
         <HelpIcon />
       </div>
     </>
   )
 }
-
-export default App
