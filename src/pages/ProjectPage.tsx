@@ -1,3 +1,6 @@
+/**
+ * Based on https://www.zooniverse.org/projects/cfllopes/splus-science-hunters
+ */
 import { useState } from "react"
 
 import HelpIcon from '../icons/HelpIcon';
@@ -28,7 +31,7 @@ export const ProjectPage = () => {
 
   return (
     <>
-      <img src={`./docs/${count}.jpeg`} alt="Logo" />
+      <img src={`../../docs/${count}.jpeg`} alt="Logo" />
 
       <div className="check-items">
         {checkItems.map((item, id) => {

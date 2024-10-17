@@ -57,5 +57,5 @@
   }
   .check-item.selected {
     outline: auto;
-    background-color: aquamarine;
+    background-color: green;
   }
