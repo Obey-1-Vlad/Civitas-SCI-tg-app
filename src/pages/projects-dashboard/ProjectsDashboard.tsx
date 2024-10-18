@@ -36,7 +36,7 @@ const PROJECTS: Project[] = [
     description: 'Annotate faces in the crowd as real detectives',
     bgPath: '/faces/street-crowd.jpg',
     imgPath: '/faces/the-face-small.png',
-    customImgStyles: '-top-6 -right-16 w-48 h-auto'
+    customImgStyles: '-top-6 -right-20 w-48 h-auto'
   },
 ];
 
