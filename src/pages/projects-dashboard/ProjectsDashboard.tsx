@@ -54,7 +54,7 @@ export const ProjectsDashboard = () => {
   )
 }
 
-const ProjectCard: React.FC<Project> = ({ id, title, description, bgPath, imgPath, customImgStyles }) => (
+const ProjectCard: React.FC<Project> = ({ id, title, description, imgPath, customImgStyles }) => (
   <Link to={`/projects/${id}`} className="block relative">
     <div 
       className="h-40 bg-black-base shadow-md py-6 px-4 hover:shadow-lg transition-shadow duration-300 relative"
