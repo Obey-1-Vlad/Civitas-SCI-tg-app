@@ -6,6 +6,8 @@ import { useState } from "react"
 import HelpIcon from '../../icons/HelpIcon';
 import './space-project-page.css';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 const CHECK_ITEMS = [
   {title: 'Galaxies', selected: false},
   {title: 'Asteroids', selected: false},
@@ -31,7 +33,7 @@ export const SpaceProjectPage = () => {
 
   return (
     <>
-      <img src={`../../docs/${count}.jpeg`} alt="Logo" />
+      <img src={`${baseUrl}/${count}.jpeg`} alt="Logo" />
 
       <div className="check-items">
         {checkItems.map((item, id) => {

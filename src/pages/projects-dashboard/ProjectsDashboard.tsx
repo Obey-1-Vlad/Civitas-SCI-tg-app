@@ -4,6 +4,8 @@ import { Header } from '../../components/Header';
 import { PROJECTS_IDS } from '../../constants';
 import './projects-dashboard.css';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 // https://www.zooniverse.org/projects/cfllopes/splus-science-hunters
 
 interface Project {
@@ -20,14 +22,14 @@ const PROJECTS: Project[] = [
     title: 'Galaxies Hunters',
     description: 'Hunt galaxies, asteroids and unusual objects to help scientists',
     bgPath: '/space/space-bg-cut.jpg',
-    imgPath: '/space/galaxy-optimised.png'
+    imgPath: `${baseUrl}/space/galaxy-optimised.png`
   },
   {
     id: PROJECTS_IDS.INSURANCE,
     title: 'Insurance Inspectors',
     description: 'Annotate cars damage as insurance expert',
     bgPath: '/insurance/black-table.jpg',
-    imgPath: '/insurance/crash-test-car.png',
+    imgPath: `${baseUrl}/insurance/crash-test-car.png`,
     customImgStyles: '-top-16 -right-28 w-56 h-auto rotate-[10deg]'
   },
   {
@@ -35,7 +37,7 @@ const PROJECTS: Project[] = [
     title: 'Recognition Detectives',
     description: 'Annotate faces in the crowd as real detectives',
     bgPath: '/faces/street-crowd.jpg',
-    imgPath: '/faces/the-face-small.png',
+    imgPath: `${baseUrl}/faces/the-face-small.png`,
     customImgStyles: '-top-6 -right-20 w-48 h-auto'
   },
 ];
