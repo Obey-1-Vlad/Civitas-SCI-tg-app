@@ -1,59 +1,63 @@
-import { useState } from 'react';
-import HelpIcon from './icons/HelpIcon';
-import './App.css';
+import React from 'react'
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useParams
+} from 'react-router-dom'
+import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
-// import WebApp from '@twa-dev/sdk';
+import { PROJECTS_IDS } from './constants.ts';
 
-const CHECK_ITEMS = [
-  {title: 'Galaxies', selected: false},
-  {title: 'Asteroids', selected: false},
-  {title: 'Unusual objects', selected: false},
-  {title: 'Just stars', selected: false}
-];
+import { ProjectsDashboard } from './pages/projects-dashboard/ProjectsDashboard.tsx'
+import { SpaceProjectPage } from './pages/space-project/SpaceProjectPage.tsx'
+import { ComingSoon } from './pages/coming-soon/ComingSoon.tsx'
+import { NotFound } from './pages/not-found/NotFound.tsx'
 
-function App() {
-  const [checkItems, setCheckItems] = useState(CHECK_ITEMS);
-  const [count, setCount] = useState(1);
+// Based on https://github.com/ton-community/tma-usdt-payments-demo/blob/master/src/components/Root.tsx
 
-  const submitLabels = () => {
-    console.log({
-      objects: checkItems.filter((item) => item.selected),
-      pictureId: count
-    });
- 
-    // reset labels
-    setCheckItems(checkItems.map(i=>({...i, selected: false})));
-    // next image 
-    setCount((count) => count + 1);
-  };
+const ProjectRouter = () => {
+  const { projectId } = useParams<{ projectId: string }>();
+
+  switch (projectId) {
+    case PROJECTS_IDS.SPACE_1:
+      return <SpaceProjectPage />;
+    case PROJECTS_IDS.INSURANCE:
+      return <ComingSoon />;
+    case PROJECTS_IDS.OTHER:
+      return <ComingSoon />;
+    default:
+      return <NotFound />;
+  }
+};
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <ProjectsDashboard />,
+  },
+  {
+    path: "projects/:projectId",
+    element: (
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <ProjectRouter />
+      </React.Suspense>
+    ),
+  },
+], {basename: '/Civitas-SCI-tg-app/'});
+
+
+export function App() {
+  const manifestUrl = React.useMemo(() => {
+    return new URL('tonconnect-manifest.json', window.location.href).toString();
+  }, []);
+
 
   return (
-    <>
-      <img src={`./docs/${count}.jpeg`} alt="Logo" />
-      <div className="check-items">
-        {checkItems.map((item, id) => {
-          return (
-            <button
-              className={`check-item ${item.selected && 'selected'}`}
-              onClick={() => {
-                const items = checkItems.map((i) => ({...i}));
-                items[id] = {...items[id], selected: !items[id].selected}
-                setCheckItems(items)
-              }}>
-              {item.title}
-            </button>
-        )})}
-      </div>
-      <div className="card">
-        <button
-         onClick={submitLabels}
-         disabled={checkItems.every(i => !i.selected)}>
-          Submit
-        </button>
-        <HelpIcon />
-      </div>
-    </>
+    <TonConnectUIProvider
+      manifestUrl={manifestUrl}
+      // actionsConfiguration={{ twaReturnUrl: 'https://t.me/tma_jetton_processing_bot/tma_jetton_processing' }}
+    >
+      <RouterProvider router={router} />
+    </TonConnectUIProvider>
   )
 }
-
-export default App

@@ -3,8 +3,8 @@
  */
 import { useState } from "react"
 
-import HelpIcon from '../icons/HelpIcon';
-import './project-page.css';
+import HelpIcon from '../../icons/HelpIcon';
+import './space-project-page.css';
 
 const CHECK_ITEMS = [
   {title: 'Galaxies', selected: false},
@@ -13,7 +13,7 @@ const CHECK_ITEMS = [
   {title: 'Just stars', selected: false}
 ];
 
-export const ProjectPage = () => {
+export const SpaceProjectPage = () => {
   const [checkItems, setCheckItems] = useState(CHECK_ITEMS);
   const [count, setCount] = useState(1);
 
