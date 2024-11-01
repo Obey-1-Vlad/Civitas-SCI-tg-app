@@ -1,12 +1,13 @@
 /**
  * Based on https://www.zooniverse.org/projects/cfllopes/splus-science-hunters
  */
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useNavigate } from 'react-router-dom';
+import { queryRowById } from '../../hooks/huggingFaceAPI';
 
 import HelpIcon from '../../icons/HelpIcon';
 import './space-project-page.css';
 
-const baseUrl = import.meta.env.BASE_URL;
 
 const CHECK_ITEMS = [
   {title: 'Galaxies', selected: false},
@@ -17,23 +18,34 @@ const CHECK_ITEMS = [
 
 export const SpaceProjectPage = () => {
   const [checkItems, setCheckItems] = useState(CHECK_ITEMS);
-  const [count, setCount] = useState(1);
+  const [dataRow, setDataRow] = useState<any>({});
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    queryRowById("0")
+    .then((response) => {
+      setDataRow(response?.rows[0]);
+    })
+  }, []);
 
   const submitLabels = () => {
     console.log({
       objects: checkItems.filter((item) => item.selected),
-      pictureId: count
+      pictureId: dataRow?.row?.image?.src
     });
  
     // reset labels
     setCheckItems(checkItems.map(i=>({...i, selected: false})));
-    // next image 
-    setCount((count) => count + 1);
+    // next row 
+    queryRowById(dataRow?.row_idx + 1)
+      .then((response) => {
+        setDataRow(response?.rows[0]);
+      })
   };
 
   return (
     <>
-      <img src={`${baseUrl}/${count}.jpeg`} alt="Logo" />
+      <img src={dataRow?.row?.image?.src} alt="Logo" />
 
       <div className="check-items">
         {checkItems.map((item, id) => {
@@ -59,6 +71,13 @@ export const SpaceProjectPage = () => {
         </button>
 
         <HelpIcon />
+      </div>
+      <div className="flex flex-col items-center justify-center">
+        <button
+          onClick={() => navigate(-1)}
+        >
+          Get Back
+        </button>
       </div>
     </>
   )
